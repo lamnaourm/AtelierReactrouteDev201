@@ -1,13 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Produit from "./Produit";
 
-export default function Produits() {
+const ProdsCategorie = () => {
   const [produits, setProduits] = useState([]);
+  const { catId } = useParams();
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get("https://api.escuelajs.co/api/v1/products");
+      const res = await axios.get(`https://api.escuelajs.co/api/v1/categories/${catId}/products`);
       return res.data;
     };
 
@@ -23,4 +25,6 @@ export default function Produits() {
       )}
     </div>
   );
-}
+};
+
+export default ProdsCategorie;
